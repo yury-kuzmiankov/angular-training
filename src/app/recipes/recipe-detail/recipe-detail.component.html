@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <h1>Recipe Name</h1>
+    <h1>{{recipe.name}}</h1>
   </div>
 </div>
 <div class="row">
@@ -24,9 +24,12 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    Description
+    {{recipe.description}}
   </div>
 </div>
+<span class="pull-right">
+  <img src="{{recipe.imagePath}}" alt="" class="img-responsive" style="max-height: 200px;">
+</span>
 <div class="row">
   <div class="col-xs-12">
     Ingredients

@@ -1,3 +1,4 @@
+import { Recipe } from './recipe.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes.component.sass']
 })
 export class RecipesComponent implements OnInit {
+  recipe: Recipe;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  displayRecipeDetail(recipe: Recipe) {
+    this.recipe = recipe;
   }
 
 }

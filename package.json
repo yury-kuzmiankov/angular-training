@@ -46,4 +46,9 @@
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "~3.4.3"
   }
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint",
+    }
+  }
 }

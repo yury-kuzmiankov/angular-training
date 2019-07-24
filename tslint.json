@@ -88,5 +88,11 @@
   },
   "rulesDirectory": [
     "codelyzer"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }

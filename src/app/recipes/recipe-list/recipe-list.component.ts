@@ -1,3 +1,4 @@
+import { RecipeService } from './../recipe.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
 
@@ -7,20 +8,13 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.sass']
 })
 export class RecipeListComponent implements OnInit {
-  @Output() displayRecipeDetailsEvt = new EventEmitter<Recipe>();
-  recipes: Recipe[] = [
-    new Recipe('test1', 'simple test1', 'http://kulinarnia.ru/wp-content/uploads/2016/08/sous-tartar-recept-klassicheskiy.jpg'),
-    new Recipe('test2', 'simple test2', 'http://kulinarnia.ru/wp-content/uploads/2016/08/sous-tartar-recept-klassicheskiy.jpg')
-  ];
+  recipes: Recipe[];
 
-  constructor() {
+  constructor(private recipeService: RecipeService) {
   }
 
   ngOnInit() {
-  }
-
-  displayRecipeDetails(recipe: Recipe) {
-    this.displayRecipeDetailsEvt.emit(recipe);
+    this.recipes = this.recipeService.getRecipes();
   }
 
 }

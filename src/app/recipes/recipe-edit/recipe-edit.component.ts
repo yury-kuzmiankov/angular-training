@@ -19,7 +19,7 @@ export class RecipeEditComponent implements OnInit {
         this.isNew = params['id'] == null;
         if (this.isNew) {
           this.recipe = new Recipe(0, '', '', '', []);
-        } else{
+        } else {
           this.recipe = this.recipeService.getRecipeById(+params['id']);
         }
       }

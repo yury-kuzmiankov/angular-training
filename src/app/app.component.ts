@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-training';
-  menuSelector = 'recipes';
-
-  changeMunu(menu: string) {
-    this.menuSelector = menu;
-  }
 }

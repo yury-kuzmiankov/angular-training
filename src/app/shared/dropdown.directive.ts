@@ -4,11 +4,11 @@ import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
   selector: '[appDropdown]'
 })
 export class DropdownDirective {
-  isDown: boolean;
+  isOpen: boolean;
 
   @HostListener('click') swapState() {
-    this.isDown = !this.isDown;
-    if (this.isDown) {
+    this.isOpen = !this.isOpen;
+    if (this.isOpen) {
       this.renderer.addClass(this.elRef.nativeElement, 'open');
     } else {
       this.renderer.removeClass(this.elRef.nativeElement, 'open');

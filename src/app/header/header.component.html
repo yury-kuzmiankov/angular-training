@@ -5,8 +5,8 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#" (click)="chooseMenu('recipes')">Recipes</a></li>
-        <li><a href="#" (click)="chooseMenu('shoping list')">Shopping List</a></li>
+        <li><a href="#" (click)="setActiveMenu(activeTab.Recipes)" i18n>Recipes</a></li>
+        <li><a href="#" (click)="setActiveMenu(activeTab.ShoppingList)" i18n>Shopping List</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" appDropdown>

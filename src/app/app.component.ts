@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActiveTab } from './shared/model/active-tab.model';
+
 
 @Component({
   selector: 'app-root',

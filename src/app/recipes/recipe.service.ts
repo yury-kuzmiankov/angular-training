@@ -27,4 +27,8 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
+  recipeSelectedEmit(recipe: Recipe) {
+    this.recipeSelected.emit(recipe);
+  }
+
 }

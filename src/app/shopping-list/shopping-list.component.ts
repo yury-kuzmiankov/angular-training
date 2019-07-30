@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Ingredient } from '../shared/ingredient.model';
+import { Ingredient } from '../shared/model/ingredient.model';
 
 @Component({
   selector: 'app-shopping-list',

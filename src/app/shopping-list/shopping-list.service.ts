@@ -16,16 +16,19 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientChangedEmit();
   }
 
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients.push(...ingredients);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientChangedEmit();
   }
 
   deleteIngredientByName(name: string) {
-    this.ingredients = this.ingredients.filter(ingredient => ingredient.name !== name);
+    this.ingredientChangedEmit();
+  }
+
+  ingredientChangedEmit() {
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
 }

@@ -7,7 +7,7 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.sass']
 })
 export class RecipeListComponent implements OnInit {
-  @Output() displayRecipeDetailsEvt = new EventEmitter<Recipe>();
+  @Output() displayRecipeDetailsMediatorEvt = new EventEmitter<Recipe>();
   recipes: Recipe[] = [
     new Recipe('test1', 'simple test1', 'http://kulinarnia.ru/wp-content/uploads/2016/08/sous-tartar-recept-klassicheskiy.jpg'),
     new Recipe('test2', 'simple test2', 'http://kulinarnia.ru/wp-content/uploads/2016/08/sous-tartar-recept-klassicheskiy.jpg')
@@ -20,7 +20,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   displayRecipeDetails(recipe: Recipe) {
-    this.displayRecipeDetailsEvt.emit(recipe);
+    this.displayRecipeDetailsMediatorEvt.emit(recipe);
   }
 
 }

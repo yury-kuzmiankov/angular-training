@@ -1,5 +1,5 @@
-import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs/Subject';
+import { Ingredient } from '../shared/model/ingredient.model';
 
 export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
@@ -17,22 +17,21 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientsChangesEmit();
+    this.ingredientChangedEmit();
   }
 
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients.push(...ingredients);
-    this.ingredientsChangesEmit();
+    this.ingredientChangedEmit();
   }
 
   deleteIngredientByName(name: string) {
-    this.ingredients = this.ingredients.filter(ingredient => ingredient.name !== name);
-    this.ingredientsChangesEmit();
+    this.ingredientChangedEmit();
   }
 
   deleteIngredientById(id: number) {
     this.ingredients.splice(id, 1);
-    this.ingredientsChangesEmit();
+    this.ingredientChangedEmit();
   }
 
   getIngredientById(id: number) {
@@ -41,10 +40,10 @@ export class ShoppingListService {
 
   updateIngredient(id: number, ingredient: Ingredient) {
     this.ingredients[id] = ingredient;
-    this.ingredientsChangesEmit();
+    this.ingredientChangedEmit();
   }
 
-  ingredientsChangesEmit() {
+  ingredientChangedEmit() {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 }

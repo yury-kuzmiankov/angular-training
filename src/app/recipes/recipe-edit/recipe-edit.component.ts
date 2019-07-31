@@ -9,18 +9,17 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-edit.component.sass']
 })
 export class RecipeEditComponent implements OnInit {
-  isNew = false;
+  isNewRecipe = false;
   recipe: Recipe;
   constructor(private activatedRoute: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        this.isNew = params['id'] == null;
-        if (this.isNew) {
-          this.recipe = new Recipe(0, '', '', '', []);
+        this.isNewRecipe = params['id'] == null;
+        if (this.isNewRecipe) {
         } else {
-          this.recipe = this.recipeService.getRecipeById(+params['id']);
+          this.recipe = this.recipeService.getRecipeById(parseInt(params['id'], 10));
         }
       }
     );

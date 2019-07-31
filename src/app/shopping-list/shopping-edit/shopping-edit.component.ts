@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Ingredient } from 'src/app/shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list.service';
-import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { ShoppingListService } from '../shopping-list.service';
+import { Ingredient } from 'src/app/shared/model/ingredient.model';
+import { NgForm } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-shopping-edit',

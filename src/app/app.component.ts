@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActiveTab } from './shared/model/active-tab.model';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-training';
+  activeTabType = ActiveTab;
+  activeTab: ActiveTab;
+
+  setActiveMenu(activeTab: ActiveTab) {
+    this.activeTab = activeTab;
+  }
 }

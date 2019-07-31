@@ -28,11 +28,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
           "configurations": {
+            "ru": {
+              "aot": true,
+              "outputPath": "dist/app/angular/",
+              "i18nFile": "src/app/locale/messages.ru.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "ru"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -65,6 +73,9 @@
             "browserTarget": "angular-training:build"
           },
           "configurations": {
+            "ru": {
+              "browserTarget": "angular-training:build:ru"
+            },
             "production": {
               "browserTarget": "angular-training:build:production"
             }

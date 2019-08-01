@@ -26,7 +26,7 @@ export class RecipeService {
   ];
 
   getRecipeById(id: number) {
-    return this.recipes[id];
+    return this.recipes.filter((recipe: Recipe) => { return recipe.id === id; })[0];
   }
 
   getRecipes() {
@@ -45,7 +45,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    this.recipes.splice(id, 1);
+    this.recipes = this.recipes.filter((recipe: Recipe) => { return recipe.id !== id; });
     this.recipesChangenEvt();
   }
 

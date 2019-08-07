@@ -14,7 +14,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   startedEditingSubscription: Subscription;
   editMode = false;
   editedItemId: number;
-  editedItem: Ingredient;
 
   constructor(private shoppingListService: ShoppingListService) {
   }
@@ -24,10 +23,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       (id: number) => {
         this.editedItemId = id;
         this.editMode = true;
-        this.editedItem = this.shoppingListService.getIngredientById(id);
+        const editedItem = this.shoppingListService.getIngredientById(id);
         this.shoppingListForm.setValue({
-          name: this.editedItem.name,
-          amount: this.editedItem.amount
+          name: editedItem.name,
+          amount: editedItem.amount
         });
       }
     );

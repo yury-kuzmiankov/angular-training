@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/model/ingredient.model';
+import { RecursiveTemplateAstVisitor } from '@angular/compiler';
 
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
@@ -26,7 +27,7 @@ export class RecipeService {
   ];
 
   getRecipeById(id: number) {
-    return this.recipes.filter((recipe: Recipe) => { return recipe.id === id; })[0];
+    return this.recipes.find((recipe: Recipe) => { return recipe.id === id; });
   }
 
   getRecipes() {
@@ -34,7 +35,13 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    recipe.id = this.recipes.length;
+    const maxId = Math.max.apply(
+      Math,
+      this.recipes.map(
+        (recipe: Recipe) => {
+          return recipe.id;
+        }));
+    recipe.id = maxId + 1;
     this.recipes.push(recipe);
     this.recipesChangenEvt();
   }
@@ -45,7 +52,11 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    this.recipes = this.recipes.filter((recipe: Recipe) => { return recipe.id !== id; });
+    const pos = this.recipes.map(
+      (recipe: Recipe) => {
+        return recipe.id;
+      }).indexOf(id);
+    this.recipes.splice(pos, 1);
     this.recipesChangenEvt();
   }
 

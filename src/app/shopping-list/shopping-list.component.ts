@@ -12,14 +12,14 @@ import { Ingredient } from '../shared/model/ingredient.model';
 export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ingredients: Ingredient[];
-  private subscription: Subscription;
+  private ingredientsChangedSubscription: Subscription;
 
   constructor(private shoppingListService: ShoppingListService) {
   }
 
   ngOnInit() {
     this.ingredients = this.shoppingListService.getShoppingList();
-    this.subscription = this.shoppingListService.ingredientsChanged.subscribe(
+    this.ingredientsChangedSubscription = this.shoppingListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
       }
@@ -27,7 +27,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.ingredientsChangedSubscription.unsubscribe();
   }
 
   deleteItem(name: string) {

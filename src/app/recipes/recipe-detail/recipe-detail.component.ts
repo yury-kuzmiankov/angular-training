@@ -5,6 +5,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Ingredient } from 'src/app/shared/model/ingredient.model';
 
+const NAVIGATE_TO_EDIT = 'edit';
+const NAVIGATE_TO_RECIPES = '/recipes';
+const ID = 'id';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -23,7 +26,7 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        this.recipe = this.recipeService.getRecipeById(parseInt(params['id'], 10));
+        this.recipe = this.recipeService.getRecipeById(parseInt(params[ID], 10));
       });
   }
 
@@ -32,12 +35,12 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onEditRecipe() {
-    this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
+    this.router.navigate([NAVIGATE_TO_EDIT], { relativeTo: this.activatedRoute });
   }
 
   onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.recipe.id);
-    this.router.navigate(['/recipes']);
+    this.router.navigate([NAVIGATE_TO_RECIPES]);
   }
 
 }

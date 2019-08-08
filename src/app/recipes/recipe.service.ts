@@ -1,7 +1,6 @@
 import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/model/ingredient.model';
-import { RecursiveTemplateAstVisitor } from '@angular/compiler';
 
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();

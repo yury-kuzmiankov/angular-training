@@ -42,7 +42,7 @@ export class RecipeService {
   }
 
   updateRecipe(id: number, recipe: Recipe) {
-    this.recipes[id] = recipe;
+    this.recipes[this.getIdList().indexOf(id)] = recipe;
     this.recipesChangenEvt();
   }
 
@@ -61,6 +61,11 @@ export class RecipeService {
       (recipe: Recipe) => {
         return recipe.id;
       });
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
 }

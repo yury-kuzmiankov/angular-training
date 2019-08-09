@@ -1,18 +1,26 @@
+import { AuthService } from './../../auth/auth.service';
 import { RecipeService } from './../../recipes/recipe.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from 'src/app/recipes/recipe.model';
 
+
 @Injectable()
 export class DataStorageService {
-  constructor(private httpClient: HttpClient, private recipeService: RecipeService) { }
+  static readonly SERVICE_URI = 'https://recipe-itiv422.firebaseio.com/recipes.json?auth=';
+
+  constructor(private httpClient: HttpClient,
+              private recipeService: RecipeService,
+              private authService: AuthService) { }
 
   storeRecipes() {
-    return this.httpClient.put('https://recipe-itiv422.firebaseio.com/recipes.json', this.recipeService.getRecipes());
+    const token = this.authService.getToken();
+    return this.httpClient.put(DataStorageService.SERVICE_URI + token, this.recipeService.getRecipes());
   }
 
   getRecipes() {
-    this.httpClient.get<Recipe[]>('https://recipe-itiv422.firebaseio.com/recipes.json').subscribe(
+    const token = this.authService.getToken();
+    this.httpClient.get<Recipe[]>(DataStorageService.SERVICE_URI + token).subscribe(
         (recipes: Recipe[]) => {
           for (const recipe of recipes) {
             if (!recipe['ingredients']) {

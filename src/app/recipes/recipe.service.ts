@@ -26,7 +26,7 @@ export class RecipeService {
   ];
 
   getRecipeById(id: number) {
-    return this.recipes.filter((recipe: Recipe) => { return recipe.id === id; })[0];
+    return this.recipes.find((recipe: Recipe) => { return recipe.id === id; });
   }
 
   getRecipes() {
@@ -34,7 +34,9 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    recipe.id = this.recipes.length;
+    const maxId = Math.max.apply(
+      Math, this.getIdList());
+    recipe.id = maxId + 1;
     this.recipes.push(recipe);
     this.recipesChangenEvt();
   }
@@ -45,7 +47,8 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    this.recipes = this.recipes.filter((recipe: Recipe) => { return recipe.id !== id; });
+    const pos = this.getIdList().indexOf(id);
+    this.recipes.splice(pos, 1);
     this.recipesChangenEvt();
   }
 
@@ -53,9 +56,11 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
-    this.recipesChangenEvt();
+  private getIdList() {
+    return this.recipes.map(
+      (recipe: Recipe) => {
+        return recipe.id;
+      });
   }
 
 }

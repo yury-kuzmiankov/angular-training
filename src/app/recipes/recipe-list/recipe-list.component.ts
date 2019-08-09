@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Navigate } from 'src/app/shared/model/navigate.model';
 
 @Component({
   selector: 'app-recipe-list',
@@ -25,7 +26,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   onNewRecipe() {
-    this.router.navigate(['new'], { relativeTo: this.activaredRoute });
+    this.router.navigate([Navigate.RECIPE.NEW], { relativeTo: this.activaredRoute });
   }
 
   ngOnDestroy() {

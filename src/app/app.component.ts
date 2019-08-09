@@ -9,10 +9,4 @@ import { ActiveTab } from './shared/model/active-tab.model';
 })
 export class AppComponent {
   title = 'angular-training';
-  activeTabType = ActiveTab;
-  activeTab: ActiveTab;
-
-  setActiveMenu(activeTab: ActiveTab) {
-    this.activeTab = activeTab;
-  }
 }

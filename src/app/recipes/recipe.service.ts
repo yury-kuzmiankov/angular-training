@@ -35,11 +35,7 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     const maxId = Math.max.apply(
-      Math,
-      this.recipes.map(
-        (recipe: Recipe) => {
-          return recipe.id;
-        }));
+      Math, this.getIdList());
     recipe.id = maxId + 1;
     this.recipes.push(recipe);
     this.recipesChangenEvt();
@@ -51,16 +47,20 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    const pos = this.recipes.map(
-      (recipe: Recipe) => {
-        return recipe.id;
-      }).indexOf(id);
+    const pos = this.getIdList().indexOf(id);
     this.recipes.splice(pos, 1);
     this.recipesChangenEvt();
   }
 
   private recipesChangenEvt() {
     this.recipesChanged.next(this.recipes.slice());
+  }
+
+  private getIdList() {
+    return this.recipes.map(
+      (recipe: Recipe) => {
+        return recipe.id;
+      });
   }
 
 }

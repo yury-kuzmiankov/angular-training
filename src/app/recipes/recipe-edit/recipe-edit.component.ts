@@ -29,14 +29,12 @@ export class RecipeEditComponent implements OnInit {
   }
 
   private initForm() {
-    let recipeName: string;
-    let recipeImagePath: string;
-    let recipeDescription : string;
+    const recipe = new Recipe(null, null, null, null, []);
     const recipeIngredients = new FormArray([]);
     if (!this.isNewRecipe) {
-      recipeName = this.recipe.name;
-      recipeImagePath = this.recipe.imagePath;
-      recipeDescription = this.recipe.description;
+      recipe.name = this.recipe.name;
+      recipe.imagePath = this.recipe.imagePath;
+      recipe.description = this.recipe.description;
       if (this.recipe.ingredients) {
         for (const ingredient of this.recipe.ingredients) {
           recipeIngredients.push(
@@ -46,9 +44,9 @@ export class RecipeEditComponent implements OnInit {
       }
     }
     this.recipeForm = new FormGroup({
-      name: new FormControl(recipeName, Validators.required),
-      imagePath: new FormControl(recipeImagePath, Validators.required),
-      description: new FormControl(recipeDescription, Validators.required),
+      name: new FormControl(recipe.name, Validators.required),
+      imagePath: new FormControl(recipe.imagePath, Validators.required),
+      description: new FormControl(recipe.description, Validators.required),
       ingredients: recipeIngredients
     });
   }

@@ -1,7 +1,6 @@
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Navigate } from '../shared/model/navigate.model';
 
 @Injectable()
 export class AuthService {
@@ -19,13 +18,13 @@ export class AuthService {
   signinUser(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(
-      () => {  this.router.navigate([Navigate.ROOT]); this.getToken(); }
+      () => { this.updateToken(); }
     ).catch(
       error => console.log(error)
     );
   }
 
-  getToken() {
+  updateToken() {
     firebase.auth().currentUser.getIdToken().then(
         (token: string) => this.token = token
     );

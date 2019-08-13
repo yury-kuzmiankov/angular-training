@@ -25,24 +25,11 @@ export class RecipeService {
       ])
   ];
 
-  getRecipeById(id: number) {
-    return this.recipes.find((recipe: Recipe) => { return recipe.id === id; });
-  }
-
-  getRecipes() {
-    return this.recipes.slice();
-  }
-
   addRecipe(recipe: Recipe) {
     const maxId = Math.max.apply(
       Math, this.getIdList());
     recipe.id = maxId + 1;
     this.recipes.push(recipe);
-    this.recipesChangenEvt();
-  }
-
-  updateRecipe(id: number, recipe: Recipe) {
-    this.recipes[this.getIdList().indexOf(id)] = recipe;
     this.recipesChangenEvt();
   }
 
@@ -52,8 +39,22 @@ export class RecipeService {
     this.recipesChangenEvt();
   }
 
-  private recipesChangenEvt() {
+  getRecipeById(id: number) {
+    return this.recipes.find((recipe: Recipe) => { return recipe.id === id; });
+  }
+
+  getRecipes() {
+    return this.recipes.slice();
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(id: number, recipe: Recipe) {
+    this.recipes[this.getIdList().indexOf(id)] = recipe;
+    this.recipesChangenEvt();
   }
 
   private getIdList() {
@@ -63,8 +64,7 @@ export class RecipeService {
       });
   }
 
-  setRecipes(recipes: Recipe[]) {
-    this.recipes = recipes;
+  private recipesChangenEvt() {
     this.recipesChanged.next(this.recipes.slice());
   }
 

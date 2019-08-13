@@ -31,23 +31,23 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  toRecipes() {
+  navigateToRecipes() {
     this.router.navigate([Navigate.RECIPE.RECIPES]);
   }
 
-  toShoppingList() {
+  navigateToShoppingList() {
     this.router.navigate([Navigate.SHOPPING_LIST.SHOPPING_LIST]);
   }
 
-  toRegister() {
+  navigateToRegister() {
     this.router.navigate([Navigate.AUTH.SIGNUP]);
   }
 
-  toLogin() {
+  navigateToLogin() {
     this.router.navigate([Navigate.AUTH.SIGNIN]);
   }
 
-  toRootPage() {
+  navigateToRootPage() {
     this.router.navigate([Navigate.ROOT]);
   }
 }

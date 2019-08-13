@@ -7,20 +7,20 @@ import { Recipe } from 'src/app/recipes/recipe.model';
 
 @Injectable()
 export class DataStorageService {
-  static readonly SERVICE_URI = 'https://recipe-itiv422.firebaseio.com/recipes.json?auth=';
+  static readonly SERVICE_URI = 'https://recipe-itiv422.firebaseio.com/recipes.json';
 
   constructor(private httpClient: HttpClient,
               private recipeService: RecipeService,
               private authService: AuthService) { }
 
   storeRecipes() {
-    const token = this.authService.getToken();
-    return this.httpClient.put(DataStorageService.SERVICE_URI + token, this.recipeService.getRecipes());
+    this.authService.updateToken();
+    return this.httpClient.put(DataStorageService.SERVICE_URI, this.recipeService.getRecipes());
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
-    this.httpClient.get<Recipe[]>(DataStorageService.SERVICE_URI + token).subscribe(
+    this.authService.updateToken();
+    this.httpClient.get<Recipe[]>(DataStorageService.SERVICE_URI).subscribe(
         (recipes: Recipe[]) => {
           for (const recipe of recipes) {
             if (!recipe['ingredients']) {

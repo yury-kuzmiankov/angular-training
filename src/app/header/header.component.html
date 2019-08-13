@@ -1,17 +1,17 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a (click)="toRootPage()" class="navbar-brand">Recipe Book</a>
+      <a (click)="navigateToRootPage()" class="navbar-brand">Recipe Book</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a (click)="toRecipes()">Recipes</a></li>
-        <li routerLinkActive="active"><a (click)="toShoppingList()">Shopping List</a></li>
+        <li routerLinkActive="active"><a (click)="navigateToRecipes()">Recipes</a></li>
+        <li routerLinkActive="active"><a (click)="navigateToShoppingList()">Shopping List</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <ng-template [ngIf]="!authService.isAuthenticated()">
-          <li><a (click)="toRegister()">Register</a></li>
-          <li><a (click)="toLogin()">Login</a></li>
+          <li><a (click)="navigateToRegister()">Register</a></li>
+          <li><a (click)="navigateToLogin()">Login</a></li>
         </ng-template>
         <ng-template [ngIf]="authService.isAuthenticated()">
           <li><a (click)="onLogout()">Logout</a></li>

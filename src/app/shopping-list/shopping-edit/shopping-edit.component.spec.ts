@@ -3,7 +3,7 @@ import { ShoppingEditComponent } from './shopping-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingListService } from '../shopping-list.service';
 
-describe('Component: User', () => {
+describe('Component: ShoppingList', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ShoppingEditComponent],
@@ -18,17 +18,14 @@ describe('Component: User', () => {
     expect(app).toBeTruthy();
   });
 
-  it('Input form is present', () => {
+  it('Should add an ingredient', () => {
     const fixture = TestBed.createComponent(ShoppingEditComponent);
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('input[type=\'text\']')).toBeTruthy();
-    expect(compiled.querySelector('input[type=\'number\']')).toBeTruthy();
-    expect(compiled.querySelector('button[type=\'submit\']')).toBeTruthy();
     fixture.detectChanges();
     expect(compiled.querySelector('button[type=\'submit\']').textContent).toContain('Add');
   });
 
-  it('Switching to edit mode', () => {
+  it('Should switch to edit mode', () => {
     const fixture = TestBed.createComponent(ShoppingEditComponent);
     const compiled = fixture.debugElement.nativeElement;
     const shoppingEditComponent = fixture.debugElement.componentInstance;
@@ -37,7 +34,7 @@ describe('Component: User', () => {
     expect(compiled.querySelector('button[type=\'submit\']').textContent).toContain('Update');
   });
 
-  it('Cleaning the form', () => {
+  it('Should clean the form', () => {
     const fixture = TestBed.createComponent(ShoppingEditComponent);
     const shoppingEditComponent = fixture.debugElement.componentInstance;
     shoppingEditComponent.editMode = true;
@@ -46,7 +43,7 @@ describe('Component: User', () => {
     expect(shoppingEditComponent.editMode).toEqual(false);
   });
 
-  it('Removal option', () => {
+  it('Should remove an ingridient', () => {
     const fixture = TestBed.createComponent(ShoppingEditComponent);
     const shoppingEditComponent = fixture.debugElement.componentInstance;
     const dataService = fixture.debugElement.injector.get(ShoppingListService);
@@ -56,7 +53,7 @@ describe('Component: User', () => {
     expect(spy.calls.count()).toEqual(1);
   });
 
-  it('Ability to add ingridient', () => {
+  it('Should add an ingridient', () => {
     const fixture = TestBed.createComponent(ShoppingEditComponent);
     const shoppingEditComponent = fixture.debugElement.componentInstance;
     const dataService = fixture.debugElement.injector.get(ShoppingListService);
@@ -66,7 +63,7 @@ describe('Component: User', () => {
     expect(spy.calls.count()).toEqual(1);
   });
 
-  it('Ability to update ingridient', () => {
+  it('Should update an ingridient', () => {
     const fixture = TestBed.createComponent(ShoppingEditComponent);
     const shoppingEditComponent = fixture.debugElement.componentInstance;
     const dataService = fixture.debugElement.injector.get(ShoppingListService);

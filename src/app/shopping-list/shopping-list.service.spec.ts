@@ -11,16 +11,24 @@ class ShoppingListServiceTestHelper {
   }
 }
 
-describe('Shopping list service tests', () => {
+describe('Service: Shopping list', () => {
 
-  it('ability to add an ingredient', () => {
+  it('Should add an ingredient', () => {
     const shoppingListService = new ShoppingListService();
     const ingredientsNum = shoppingListService.getShoppingList().length;
     shoppingListService.addIngredient(ShoppingListServiceTestHelper.getTestIngredient());
     expect(ingredientsNum + 1).toEqual(shoppingListService.getShoppingList().length);
   });
 
-  it('ability to delete an ingredient', () => {
+  it('Should test mock', () => {
+    const shoppingListService = new ShoppingListService();
+    const spy = spyOn(shoppingListService, 'getShoppingList').and.returnValue(
+      [ShoppingListServiceTestHelper.getTestIngredient()]
+    );
+    expect(shoppingListService.getShoppingList()).toEqual([ShoppingListServiceTestHelper.getTestIngredient()]);
+  });
+
+  it('Should delete an ingredient', () => {
     const shoppingListService = new ShoppingListService();
     shoppingListService.addIngredient(ShoppingListServiceTestHelper.getTestIngredient());
     const ingredientsNum = shoppingListService.getShoppingList().length;
@@ -30,7 +38,7 @@ describe('Shopping list service tests', () => {
     expect(ingredientsNum - 1).toEqual(shoppingListService.getShoppingList().length);
   });
 
-  it('delete an ingredient', () => {
+  it('Should delete the ingredient', () => {
     const shoppingListService = new ShoppingListService();
     shoppingListService.addIngredient(ShoppingListServiceTestHelper.getTestIngredient());
     const id = ShoppingListServiceTestHelper.getIngredientIdByName(shoppingListService, ShoppingListServiceTestHelper.INGREDIENT_NAME);
@@ -39,7 +47,7 @@ describe('Shopping list service tests', () => {
                                                                            ShoppingListServiceTestHelper.INGREDIENT_NAME));
   });
 
-  it('ability to update an ingredient', () => {
+  it('Should update an ingredient', () => {
     const shoppingListService = new ShoppingListService();
     shoppingListService.addIngredient(ShoppingListServiceTestHelper.getTestIngredient());
     shoppingListService.updateIngredient(

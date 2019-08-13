@@ -1,9 +1,9 @@
+import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
-import { EventEmitter } from '@angular/core';
 import { Ingredient } from '../shared/model/ingredient.model';
 
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
+  recipesChanged = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
     new Recipe(
       0,
@@ -25,16 +25,47 @@ export class RecipeService {
       ])
   ];
 
+  addRecipe(recipe: Recipe) {
+    const maxId = Math.max.apply(
+      Math, this.getIdList());
+    recipe.id = maxId + 1;
+    this.recipes.push(recipe);
+    this.recipesChangenEvt();
+  }
+
+  deleteRecipe(id: number) {
+    const pos = this.getIdList().indexOf(id);
+    this.recipes.splice(pos, 1);
+    this.recipesChangenEvt();
+  }
+
   getRecipeById(id: number) {
-    return this.recipes[id];
+    return this.recipes.find((recipe: Recipe) => { return recipe.id === id; });
   }
 
   getRecipes() {
     return this.recipes.slice();
   }
 
-  recipeSelectedEmit(recipe: Recipe) {
-    this.recipeSelected.emit(recipe);
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(id: number, recipe: Recipe) {
+    this.recipes[this.getIdList().indexOf(id)] = recipe;
+    this.recipesChangenEvt();
+  }
+
+  private getIdList() {
+    return this.recipes.map(
+      (recipe: Recipe) => {
+        return recipe.id;
+      });
+  }
+
+  private recipesChangenEvt() {
+    this.recipesChanged.next(this.recipes.slice());
   }
 
 }

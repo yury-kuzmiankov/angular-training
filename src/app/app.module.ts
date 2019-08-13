@@ -39,7 +39,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
     SigninComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule],
-  providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuard, 
+  providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
